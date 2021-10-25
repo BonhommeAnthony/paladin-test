@@ -1,7 +1,7 @@
 import { Flex } from "@chakra-ui/layout";
 import DashContainer from "../components/Dashboard/DashContainer";
 import HeaderContainer from "../components/Header/HeaderContainer";
-import { getPool, getToken, getWeb3 } from "../utils";
+import { getPool, getWeb3 } from "../utils";
 import { useEffect, useState } from "react";
 
 export default function Home() {
@@ -51,7 +51,11 @@ export default function Home() {
         account={account}
         connectWallet={connectWallet}
       />
-      <DashContainer account={account} pool={pool} />
+      <DashContainer
+        connectWallet={connectWallet}
+        account={account}
+        pool={pool}
+      />
     </Flex>
   );
 }

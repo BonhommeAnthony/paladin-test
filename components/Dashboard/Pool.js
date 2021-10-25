@@ -3,7 +3,7 @@ import { Box, Text, Flex } from "@chakra-ui/layout";
 import millify from "millify";
 import TokenMenu from "./TokenMenu";
 
-const Dashboard = ({ pool, account }) => {
+const Dashboard = ({ pool, account, connectWallet }) => {
   const uniPrice = 26.21;
   console.log(account);
   return (
@@ -108,6 +108,7 @@ const Dashboard = ({ pool, account }) => {
         mt="35px"
         w="100%"
         h="50px"
+        onClick={account ? "" : connectWallet}
       >
         {account ? "DEPOSIT" : "CONNECT TO A WALLET"}
       </Button>

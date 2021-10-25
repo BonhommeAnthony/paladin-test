@@ -2,7 +2,7 @@ import { Button } from "@chakra-ui/button";
 import { Box, Text, Flex } from "@chakra-ui/layout";
 import TokenMenu from "./TokenMenu";
 
-const Dashboard = ({ account }) => {
+const Dashboard = ({ account, connectWallet }) => {
   return (
     <Box
       p="15px"
@@ -92,6 +92,7 @@ const Dashboard = ({ account }) => {
         mt="35px"
         w="100%"
         h="50px"
+        onClick={account ? "" : connectWallet}
       >
         {account ? "WITHDRAW" : "CONNECT TO A WALLET"}
       </Button>
