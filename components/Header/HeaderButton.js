@@ -3,10 +3,11 @@ import { Flex } from "@chakra-ui/layout";
 
 import React from "react";
 
-const HeaderButton = () => {
+const HeaderButton = ({ connectWallet }) => {
   return (
     <Flex>
       <Button
+        onClick={connectWallet}
         p="8px 16px"
         bg="#211a15"
         color="white"

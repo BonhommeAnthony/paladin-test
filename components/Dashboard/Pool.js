@@ -1,12 +1,9 @@
 import { Button } from "@chakra-ui/button";
-import { Box, Text, Flex, Stack } from "@chakra-ui/layout";
-import { ethers } from "ethers";
+import { Box, Text, Flex } from "@chakra-ui/layout";
 import millify from "millify";
-import React, { useEffect, useState } from "react";
-import { getPool } from "../../utils";
 import TokenMenu from "./TokenMenu";
 
-const Dashboard = ({ isActive, pool, account }) => {
+const Dashboard = ({ pool, account }) => {
   const uniPrice = 26.21;
   console.log(account);
   return (
@@ -20,7 +17,7 @@ const Dashboard = ({ isActive, pool, account }) => {
       bgColor="#211A15"
     >
       <Text fontSize="20px" lineHeight="28px" color="white" as="h3">
-        Dashboard
+        palUNI Pool
       </Text>
       <Box
         pt="20px"
@@ -69,23 +66,36 @@ const Dashboard = ({ isActive, pool, account }) => {
         fontSize="12px"
         lineHeight="24px"
       >
-        <Text>Your Stats</Text>
+        <Text>Pool Stats</Text>
         <Flex justifyContent="space-between">
-          <Flex>Balance</Flex>
-
-          <Flex>{account ? "0 palUni / $0" : "-"}</Flex>
+          <Flex>Total Supply</Flex>
+          {account ? (
+            <Flex>
+              {millify(pool.totalSupply)} UNI / $
+              {millify(pool.totalSupply * uniPrice)}{" "}
+            </Flex>
+          ) : (
+            <Flex>-</Flex>
+          )}
         </Flex>
         <Flex justifyContent="space-between">
-          <Flex>Conversion</Flex>
-          <Flex>{account ? "1 palUni = 1.4 UNI" : "-"}</Flex>
+          <Flex>Total Borrowed</Flex>
+          {account ? (
+            <Flex>
+              {millify(pool.totalBorrowed)} UNI / $
+              {millify(pool.totalBorrowed * uniPrice)}
+            </Flex>
+          ) : (
+            <Flex>-</Flex>
+          )}
         </Flex>
         <Flex justifyContent="space-between">
-          <Flex>Your Share of the Pool</Flex>
-          <Flex>{account ? "0%" : "-"}</Flex>
+          <Flex>Active Loans</Flex>
+          {account ? <Flex>{pool?.totalLoan}</Flex> : <Flex>-</Flex>}
         </Flex>
         <Flex justifyContent="space-between">
-          <Flex>Current Borrow Rate</Flex>
-          <Flex>{account ? "3.4%" : "-"}</Flex>
+          <Flex>Minimum Borrow Period</Flex>
+          {account ? <Flex>7 days</Flex> : <Flex>-</Flex>}
         </Flex>
       </Box>
       <Button
@@ -99,7 +109,7 @@ const Dashboard = ({ isActive, pool, account }) => {
         w="100%"
         h="50px"
       >
-        {account ? "WITHDRAW" : "CONNECT TO A WALLET"}
+        {account ? "DEPOSIT" : "CONNECT TO A WALLET"}
       </Button>
     </Box>
   );
