@@ -1,9 +1,7 @@
-import { Button } from "@chakra-ui/button";
-import { Box, Container, Flex } from "@chakra-ui/layout";
+import { Flex } from "@chakra-ui/layout";
 import DashContainer from "../components/Dashboard/DashContainer";
-import { ethers } from "ethers";
 import HeaderContainer from "../components/Header/HeaderContainer";
-import { getPool, getPoolContract, getToken, getWeb3 } from "../utils";
+import { getPool, getToken, getWeb3 } from "../utils";
 import { useEffect, useState } from "react";
 
 export default function Home() {
@@ -20,7 +18,6 @@ export default function Home() {
     const init = async () => {
       const web3 = await getWeb3();
       const accounts = await web3.listAccounts();
-      const token = await getToken(web3);
       if (accounts.length > 0) {
         const balance = await web3.getBalance(accounts[0]);
         const pool = await getPool(web3);
@@ -29,7 +26,6 @@ export default function Home() {
         setPool(pool);
       }
       setWeb3(web3);
-      console.log("token", token);
     };
     init();
   }, []);
@@ -41,7 +37,6 @@ export default function Home() {
     setAccount(accounts[0]);
     setPool(pool);
   };
-  console.log("pool", pool);
 
   return (
     <Flex

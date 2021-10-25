@@ -1,6 +1,5 @@
 import { Button } from "@chakra-ui/button";
 import { Flex } from "@chakra-ui/layout";
-import React from "react";
 
 const Switch = ({ isActive, setIsActive }) => {
   return (

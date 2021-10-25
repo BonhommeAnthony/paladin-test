@@ -10,9 +10,9 @@ const DashContainer = ({ pool, account }) => {
     <Flex direction="column">
       <Switch isActive={isActive} setIsActive={setIsActive} />
       {isActive === "pool" ? (
-        <Pool account={account} pool={pool} isActive={isActive} />
+        <Pool account={account} pool={pool} />
       ) : (
-        <Dashboard account={account} pool={pool} isActive={isActive} />
+        <Dashboard account={account} />
       )}
     </Flex>
   );

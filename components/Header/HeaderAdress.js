@@ -1,6 +1,4 @@
-import { Button } from "@chakra-ui/button";
 import { Flex } from "@chakra-ui/layout";
-import React from "react";
 
 const HeaderAdress = ({ etherBalance, account }) => {
   return (
@@ -12,7 +10,6 @@ const HeaderAdress = ({ etherBalance, account }) => {
         border="solid 4px #211A15"
         w="330px"
         h="40px"
-        // justifyContent="space-between"
       >
         <Flex justify="center" w="125px">
           {etherBalance} ETH

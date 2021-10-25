@@ -9,11 +9,12 @@ const HeaderContainer = ({ connectWallet, account, etherBalance }) => {
     <Flex w="100%" position="absolute" top="0">
       <Flex
         mx="auto"
-        px="24px"
+        px={["0", "24px"]}
         mt="24px"
         justifyContent="space-between"
         w="2000px"
         align="center"
+        display={["none", "flex"]}
       >
         <Logo />
         {account ? (

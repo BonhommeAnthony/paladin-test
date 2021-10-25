@@ -11,7 +11,7 @@ import { ChevronDownIcon, ChevronRightIcon } from "@chakra-ui/icons";
 
 const TokenMenu = () => {
   return (
-    <Menu preventOverflow="true" w="20px" placement="right">
+    <Menu autoSelect={false} preventOverflow="true" w="20px" placement="auto">
       {({ isOpen }) => (
         <>
           <MenuButton transition="all 0.2s" color="white">

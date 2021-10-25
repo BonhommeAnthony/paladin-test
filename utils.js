@@ -1,8 +1,6 @@
-import { Stack } from "@chakra-ui/layout";
 import { ethers } from "ethers";
 import ABI from "./abi.json";
-import tokenABI from "./tokenAbi.json";
-const uniTokenList = "0x961692fb4Ca983A116a6432E2b82972094c71cf2";
+
 const uniPoolList = "0xb1265a6b2c5d43ff358a847df64fd825b7ed70e0";
 
 const getWeb3 = () => {
@@ -38,9 +36,4 @@ const getPool = async (web3) => {
   return { totalSupply, totalBorrowed, totalLoan };
 };
 
-const getToken = async (web3) => {
-  const tokenContract = new ethers.Contract(uniTokenList, tokenABI, web3);
-  return tokenContract;
-};
-
-export { getWeb3, getPool, getToken };
+export { getWeb3, getPool };

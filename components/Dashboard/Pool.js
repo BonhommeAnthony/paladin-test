@@ -12,7 +12,7 @@ const Dashboard = ({ pool, account }) => {
       boxShadow="0px 8px 16px rgba(0, 0, 0, 0.1)"
       borderRadius="10px"
       mt="20px"
-      w={["auto", "500px"]}
+      w={["300px", "500px"]}
       h="480px"
       bgColor="#211A15"
     >

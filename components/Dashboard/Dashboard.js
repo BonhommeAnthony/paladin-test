@@ -1,21 +1,15 @@
 import { Button } from "@chakra-ui/button";
-import { Box, Text, Flex, Stack } from "@chakra-ui/layout";
-import { ethers } from "ethers";
-import millify from "millify";
-import React, { useEffect, useState } from "react";
-import { getPool } from "../../utils";
+import { Box, Text, Flex } from "@chakra-ui/layout";
 import TokenMenu from "./TokenMenu";
 
-const Dashboard = ({ isActive, pool, account }) => {
-  const uniPrice = 26.21;
-  console.log(account);
+const Dashboard = ({ account }) => {
   return (
     <Box
       p="15px"
       boxShadow="0px 8px 16px rgba(0, 0, 0, 0.1)"
       borderRadius="10px"
       mt="20px"
-      w={["auto", "500px"]}
+      w={["300px", "500px"]}
       h="480px"
       bgColor="#211A15"
     >

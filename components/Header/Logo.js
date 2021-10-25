@@ -4,7 +4,7 @@ import React from "react";
 
 const Logo = () => {
   return (
-    <Flex>
+    <Flex mb={["15px", ""]}>
       <Image src="/logoPaladin.svg" alt="Segun Adebayo" />
     </Flex>
   );
