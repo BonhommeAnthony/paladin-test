@@ -9,8 +9,6 @@ const poolAbi = [
   "function minBorrowLength() public view returns(uint)",
   "function getLoansPools() external view returns(address [] memory)",
   "function balanceOf(address _account) external view returns(uint)",
-  "function getBorrowData(address _loanAddress) external view returns (address _borrower, address _loan, uint _amount, address _underlying, uint _feesAmount, uint _feesUsed, uint _startBlock, bool _closed)",
-  "function totalReserve() public view returns(uint)",
   "function borrowRatePerBlock() external view returns (uint)",
 ];
 
@@ -33,4 +31,41 @@ const getWeb3 = () => {
   });
 };
 
-export { getWeb3, uniPoolAddress, poolAbi };
+const getData = async (provider, account) => {
+  const uniPoolContract = new ethers.Contract(
+    uniPoolAddress,
+    poolAbi,
+    provider
+  );
+  const balance = await provider.getBalance(account);
+  const uniBalanceRaw = await uniPoolContract.underlyingBalanceOf(account);
+  const totalSupplyRaw = await uniPoolContract._underlyingBalance();
+  const totalBorrowedRaw = await uniPoolContract.totalBorrowed();
+  const minBorrowLengthRaw = await uniPoolContract.minBorrowLength();
+  const totalLoanRaw = await uniPoolContract.getLoansPools();
+  const borrowRatePerBlockRaw = await uniPoolContract.borrowRatePerBlock();
+  const palUNIBalanceRaw = await uniPoolContract.balanceOf(account);
+  const totalSupply = ethers.utils.formatEther(totalSupplyRaw.toString());
+  const uniBalance = ethers.utils.formatEther(uniBalanceRaw.toString());
+  const palUNIBalance = ethers.utils.formatEther(palUNIBalanceRaw.toString());
+  const totalBorrowed = ethers.utils.formatEther(totalBorrowedRaw.toString());
+  const minBorrowLength = Math.trunc(
+    (minBorrowLengthRaw.toString() * 15) / 86400
+  );
+  const borrowRate = (borrowRatePerBlockRaw.toString() / 100000000000).toFixed(
+    1
+  );
+
+  return {
+    totalSupply,
+    totalBorrowed,
+    totalLoanRaw,
+    minBorrowLength,
+    borrowRate,
+    palUNIBalance,
+    uniBalance,
+    balance,
+  };
+};
+
+export { getWeb3, uniPoolAddress, poolAbi, getData };
