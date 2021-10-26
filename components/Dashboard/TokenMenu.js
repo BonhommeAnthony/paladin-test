@@ -5,7 +5,6 @@ import {
   MenuItem,
   Flex,
   Image,
-  Button,
 } from "@chakra-ui/react";
 import { ChevronDownIcon, ChevronRightIcon } from "@chakra-ui/icons";
 
@@ -27,7 +26,7 @@ const TokenMenu = () => {
                   boxSize="20px"
                   borderRadius="full"
                   src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e7/Uniswap_Logo.svg/1026px-Uniswap_Logo.svg.png"
-                  alt="Simon the pensive"
+                  alt="uni logo"
                   mr="12px"
                 />{" "}
                 UNI
@@ -45,7 +44,7 @@ const TokenMenu = () => {
                 boxSize="2rem"
                 borderRadius="full"
                 src="https://actufinance.fr/wp-content/uploads/2021/04/aave-aave-logo.png"
-                alt="Fluffybuns the destroyer"
+                alt="aave logo"
                 mr="12px"
               />
               <span>AAVE</span>
@@ -55,7 +54,7 @@ const TokenMenu = () => {
                 boxSize="2rem"
                 borderRadius="full"
                 src="https://actufinance.fr/wp-content/uploads/2021/04/aave-aave-logo.png"
-                alt="Simon the pensive"
+                alt="aave logo"
                 mr="12px"
               />
               <span>stkAAVE</span>
@@ -65,7 +64,7 @@ const TokenMenu = () => {
                 boxSize="2rem"
                 borderRadius="full"
                 src="https://s2.coinmarketcap.com/static/img/coins/200x200/5692.png"
-                alt="Simon the pensive"
+                alt="compound logo"
                 mr="12px"
               />
               <span>COMP</span>

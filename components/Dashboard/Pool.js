@@ -3,9 +3,8 @@ import { Box, Text, Flex } from "@chakra-ui/layout";
 import millify from "millify";
 import TokenMenu from "./TokenMenu";
 
-const Dashboard = ({ pool, account, connectWallet }) => {
+const Dashboard = ({ data, account, connectWallet }) => {
   const uniPrice = 26.21;
-  console.log(account);
   return (
     <Box
       p="15px"
@@ -51,7 +50,7 @@ const Dashboard = ({ pool, account, connectWallet }) => {
           </Flex>
         </Flex>
         <Text color="#FFFFFF99" mt="15px" fontSize="14px" fontWeight="400">
-          Balance:
+          Balance: {data?.uniBalance} UNI
         </Text>
       </Box>
       <Box
@@ -71,8 +70,8 @@ const Dashboard = ({ pool, account, connectWallet }) => {
           <Flex>Total Supply</Flex>
           {account ? (
             <Flex>
-              {millify(pool.totalSupply)} UNI / $
-              {millify(pool.totalSupply * uniPrice)}{" "}
+              {millify(data?.totalSupply)} UNI / $
+              {millify(data?.totalSupply * uniPrice)}{" "}
             </Flex>
           ) : (
             <Flex>-</Flex>
@@ -82,8 +81,8 @@ const Dashboard = ({ pool, account, connectWallet }) => {
           <Flex>Total Borrowed</Flex>
           {account ? (
             <Flex>
-              {millify(pool.totalBorrowed)} UNI / $
-              {millify(pool.totalBorrowed * uniPrice)}
+              {millify(data?.totalBorrowed)} UNI / $
+              {millify(data?.totalBorrowed * uniPrice)}
             </Flex>
           ) : (
             <Flex>-</Flex>
@@ -91,11 +90,11 @@ const Dashboard = ({ pool, account, connectWallet }) => {
         </Flex>
         <Flex justifyContent="space-between">
           <Flex>Active Loans</Flex>
-          {account ? <Flex>{pool?.totalLoan}</Flex> : <Flex>-</Flex>}
+          {account ? <Flex>{data?.totalLoanRaw.length}</Flex> : <Flex>-</Flex>}
         </Flex>
         <Flex justifyContent="space-between">
           <Flex>Minimum Borrow Period</Flex>
-          {account ? <Flex>7 days</Flex> : <Flex>-</Flex>}
+          {account ? <Flex>{data?.minBorrowLength} days</Flex> : <Flex>-</Flex>}
         </Flex>
       </Box>
       <Button
@@ -108,7 +107,7 @@ const Dashboard = ({ pool, account, connectWallet }) => {
         mt="35px"
         w="100%"
         h="50px"
-        onClick={account ? "" : connectWallet}
+        onClick={account ? null : connectWallet}
       >
         {account ? "DEPOSIT" : "CONNECT TO A WALLET"}
       </Button>
