@@ -93,4 +93,4 @@ const getData = async (provider, account) => {
   };
 };
 
-export { getWeb3, uniPoolAddress, poolAbi, getData };
+export { getWeb3, getData };
