@@ -1,9 +1,10 @@
 import { Button } from "@chakra-ui/button";
 import { Box, Text, Flex } from "@chakra-ui/layout";
+import { Spinner } from "@chakra-ui/spinner";
 import millify from "millify";
 import TokenMenu from "./TokenMenu";
 
-const Dashboard = ({ data, account, connectWallet }) => {
+const Dashboard = ({ data, account, connectWallet, isLoading }) => {
   const uniPrice = 26.21;
   return (
     <Box
@@ -50,7 +51,7 @@ const Dashboard = ({ data, account, connectWallet }) => {
           </Flex>
         </Flex>
         <Text color="#FFFFFF99" mt="15px" fontSize="14px" fontWeight="400">
-          Balance: {data?.uniBalance} UNI
+          Balance: {data.userUniBalance} UNI
         </Text>
       </Box>
       <Box
@@ -68,36 +69,57 @@ const Dashboard = ({ data, account, connectWallet }) => {
         <Text>Pool Stats</Text>
         <Flex justifyContent="space-between">
           <Flex>Total Supply</Flex>
-          {account ? (
+          {isLoading ? (
             <Flex>
-              {millify(data?.totalSupply)} UNI / $
-              {millify(data?.totalSupply * uniPrice)}{" "}
+              <Spinner size="xs" />
             </Flex>
           ) : (
-            <Flex>-</Flex>
+            <Flex>
+              {account
+                ? `${millify(data.totalUniSupply)} UNI / $
+                ${millify(data.totalUniSupply * uniPrice)}`
+                : "-"}
+            </Flex>
           )}
         </Flex>
         <Flex justifyContent="space-between">
           <Flex>Total Borrowed</Flex>
-          {account ? (
+          {isLoading ? (
             <Flex>
-              {millify(data?.totalBorrowed)} UNI / $
-              {millify(data?.totalBorrowed * uniPrice)}
+              <Spinner size="xs" />
             </Flex>
           ) : (
-            <Flex>-</Flex>
+            <Flex>
+              {account
+                ? `${millify(data.totalUniBorrowed)} UNI / $
+                ${millify(data.totalUniBorrowed * uniPrice)}`
+                : "-"}
+            </Flex>
           )}
         </Flex>
         <Flex justifyContent="space-between">
           <Flex>Active Loans</Flex>
-          {account ? <Flex>{data?.totalLoanRaw.length}</Flex> : <Flex>-</Flex>}
+          {isLoading ? (
+            <Flex>
+              <Spinner size="xs" />
+            </Flex>
+          ) : (
+            <Flex>{account ? `${data.activeLoan.length}` : "-"}</Flex>
+          )}
         </Flex>
         <Flex justifyContent="space-between">
           <Flex>Minimum Borrow Period</Flex>
-          {account ? <Flex>{data?.minBorrowLength} days</Flex> : <Flex>-</Flex>}
+          {isLoading ? (
+            <Flex>
+              <Spinner size="xs" />
+            </Flex>
+          ) : (
+            <Flex>{account ? `${data.minBorrowLength} days` : "-"}</Flex>
+          )}
         </Flex>
       </Box>
       <Button
+        isLoading={isLoading}
         color="#FFFFFF"
         fontWeight="400"
         boxShadow="0px 2px 0px rgba(0, 0, 0, 0.016)"

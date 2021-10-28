@@ -1,8 +1,9 @@
 import { Button } from "@chakra-ui/button";
 import { Box, Text, Flex } from "@chakra-ui/layout";
+import { Spinner } from "@chakra-ui/spinner";
 import TokenMenu from "./TokenMenu";
 
-const Dashboard = ({ account, connectWallet, data }) => {
+const Dashboard = ({ account, connectWallet, data, isLoading }) => {
   const uniPrice = 26.21;
   return (
     <Box
@@ -49,7 +50,7 @@ const Dashboard = ({ account, connectWallet, data }) => {
           </Flex>
         </Flex>
         <Text color="#FFFFFF99" mt="15px" fontSize="14px" fontWeight="400">
-          Balance: {data?.palUNIBalance} palUNI
+          Balance: {data.palUNIBalance} palUNI
         </Text>
       </Box>
       <Box
@@ -67,29 +68,57 @@ const Dashboard = ({ account, connectWallet, data }) => {
         <Text>Your Stats</Text>
         <Flex justifyContent="space-between">
           <Flex>Balance</Flex>
-
-          <Flex>
-            {account
-              ? `${data?.palUNIBalance} palUni / $${
-                  data?.palUNIBalance * (uniPrice * 1.4)
-                }`
-              : "-"}
-          </Flex>
+          {isLoading ? (
+            <Flex>
+              <Spinner size="xs" />
+            </Flex>
+          ) : (
+            <Flex>
+              {account
+                ? `${data.palUNIBalance} palUni / $${
+                    data.palUNIBalance * (uniPrice * 1.4)
+                  }`
+                : "-"}
+            </Flex>
+          )}
         </Flex>
         <Flex justifyContent="space-between">
           <Flex>Conversion</Flex>
-          <Flex>{account ? "1 palUni = 1.4 UNI" : "-"}</Flex>
+          {isLoading ? (
+            <Flex>
+              <Spinner size="xs" />
+            </Flex>
+          ) : (
+            <Flex>{account ? "1 palUni = 1.4 UNI" : "-"}</Flex>
+          )}
         </Flex>
         <Flex justifyContent="space-between">
           <Flex>Your Share of the Pool</Flex>
-          <Flex>{account ? "0%" : "-"}</Flex>
+          {isLoading ? (
+            <Flex>
+              <Spinner size="xs" />
+            </Flex>
+          ) : (
+            <Flex>
+              {account
+                ? `${(data.palUNIBalance * 100) / data.palUNItotalSupply}%`
+                : "-"}
+            </Flex>
+          )}
         </Flex>
         <Flex justifyContent="space-between">
           <Flex>Current Borrow Rate</Flex>
-          <Flex>{account ? `${data?.borrowRate}%` : "-"}</Flex>
+          {isLoading ? (
+            <Flex>
+              <Spinner size="xs" />
+            </Flex>
+          ) : (
+            <Flex>{account ? `${data.borrowRate}%` : "-"}</Flex>
+          )}
         </Flex>
       </Box>
       <Button
+        isLoading={isLoading}
         color="#FFFFFF"
         fontWeight="400"
         boxShadow="0px 2px 0px rgba(0, 0, 0, 0.016)"
